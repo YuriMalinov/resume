@@ -1,0 +1,60 @@
+[v-cloak] {
+    display: none;
+}
+
+.container {
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+h1, h2, h3, h4, h5 {
+    font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+h2 {
+    margin-top: 20px;
+}
+
+.avatar {
+    float: right;
+    margin-right: 30px;
+}
+
+.item .key {
+    display: inline-block;
+    min-width: 130px;
+}
+
+.item .value {
+    display: inline-block;
+}
+
+.badge.badge-light {
+    color: black;
+    margin-right: 10px;
+}
+
+
+.float-item {
+    clear: both;
+}
+
+.float-item .float-key {
+    float: left;
+    min-width: 130px;
+}
+
+.float-item .float-value {
+    float: left;
+}
+
+.float-item:after {
+    content: '';
+    display: block;
+    clear: both;
+}
+
+
+.experience {
+    margin-bottom: 40px;
+}

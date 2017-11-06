@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Малинов Юрий, резюме</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/4.0.0-alpha.6/journal/bootstrap.min.css"/>
+    <link rel="stylesheet" href="/cv/css/cv.css"/>
+
+    <link rel="shortcut icon" href="/cv/img/favicon.ico" type="image/x-icon">
+</head>
+<body>
+
+<div id="resume" class="container">
+    <div v-if="!loaded">Загружаем данные</div>
+    <div v-cloak="" v-if="resume">
+        <img src="/cv/img/avatar.png" class="avatar">
+        <h1>{{ resume.name }}
+            <a href="https://github.com/YuriMalinov/resume/blob/master/src/main/kotlin/ru/smarty/resume/cv.kt" class="small btn btn-outline-primary">View Source</a>
+        </h1>
+        <div class="vcard">
+            <div class="item">
+                <div class="key">Email:</div>
+                <div class="value"><a :href="'mailto:' + resume.contacts.email">{{ resume.contacts.email }}</a></div>
+            </div>
+            <div class="item">
+                <div class="key">Skype:</div>
+                <div class="value">{{ resume.contacts.skype }}</div>
+            </div>
+            <div class="item">
+                <div class="key">Phone:</div>
+                <div class="value">{{ resume.contacts.phone }}</div>
+            </div>
+            <div class="item">
+                <div class="key">GitHub:</div>
+                <div class="value"><a :href="resume.contacts.github" target="_blank">{{ resume.contacts.github }}</a></div>
+            </div>
+            <div class="item">
+                <div class="key">LinkedIn:</div>
+                <div class="value"><a :href="resume.contacts.linkedin" target="_blank">{{ resume.contacts.linkedin }}</a></div>
+            </div>
+        </div>
+
+
+        <div class="short-info">
+            <h2>Коротко обо мне</h2>
+            <div v-for="info in resume.shortInfo">
+                <h5>{{ info.name }}</h5>
+                <ul>
+                    <li v-for="item in info.items">{{ item }}</li>
+                </ul>
+            </div>
+        </div>
+
+
+        <div class="skills">
+            <h2>Мои навыки и технологии</h2>
+            <div v-for="skillSet in resume.skills" class="item">
+                <div class="key">{{ skillSet[0].name }}</div>
+                <div class="value">
+                    <span class="badge badge-light"
+                          v-for="skill in skillSet.slice(1)"
+                          :title="skill.notes">{{ skill.name }}</span>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="education">
+            <h2>Образование</h2>
+            <div v-for="education in resume.education" class="float-item">
+                <div class="float-key">{{ education.year }}</div>
+                <div class="float-value">
+                    <div>{{ education.name}}</div>
+                    <div>{{ education.speciality }}</div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="experience">
+            <h2>Опыт работы
+                <a href="javascript:void(0)" class="small btn btn-outline-primary"
+                   v-if="!experienceDetails" @click="experienceDetails = true">больше деталей</a>
+                <a href="javascript:void(0)" class="small btn btn-outline-primary"
+                   v-if="experienceDetails" @click="experienceDetails = false">меньше деталей</a>
+            </h2>
+            <div v-for="experience in resume.experiences" class="experience">
+                <div class="text-muted">{{ experience.timeRange.first }} - {{ experience.timeRange.second }}</div>
+                <strong>{{ experience.title }}</strong>
+                <div>{{ experience.company}} - {{ experience.shortDescription }}</div>
+                <ul v-if="experienceDetails">
+                    <li v-for="task in experience.tasks">{{ task }}</li>
+                </ul>
+
+                <div class="projectы">
+                    Ключевые проекты:
+                    <ul>
+                        <li class="project" v-for="project in experience.projects">
+                            <div><strong>{{ project.name }}</strong></div>
+                            <div class="text-muted">{{ project.description }}</div>
+                            <div class="item" v-if="experienceDetails">
+                                <div class="key">Роли</div>
+                                <div class="value">
+                                    <span class="badge badge-light" v-for="role in project.roles">{{ role.name }}</span>
+                                </div>
+                            </div>
+                            <div class="item" v-if="experienceDetails">
+                                <div class="key">Технологии</div>
+                                <div class="value">
+                                    <span class="badge badge-light" v-for="skill in project.skills">{{ skill.name }}</span>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <a :href="'mailto:' + resume.contacts.email" class="btn btn-primary btn-lg">Связаться</a>
+    </div>
+</div>
+
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.2.1.min.js" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.3/vue.min.js"></script>
+<script src="/cv/js/cv.js"></script>
+
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript" >
+    (function (d, w, c) {
+        (w[c] = w[c] || []).push(function() {
+            try {
+                w.yaCounter46535907 = new Ya.Metrika({
+                    id:46535907,
+                    clickmap:true,
+                    trackLinks:true,
+                    accurateTrackBounce:true,
+                    webvisor:true,
+                    ut:"noindex"
+                });
+            } catch(e) { }
+        });
+
+        var n = d.getElementsByTagName("script")[0],
+            s = d.createElement("script"),
+            f = function () { n.parentNode.insertBefore(s, n); };
+        s.type = "text/javascript";
+        s.async = true;
+        s.src = "https://mc.yandex.ru/metrika/watch.js";
+
+        if (w.opera == "[object Opera]") {
+            d.addEventListener("DOMContentLoaded", f, false);
+        } else { f(); }
+    })(document, window, "yandex_metrika_callbacks");
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/46535907?ut=noindex" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+
+</body>
+</html>
